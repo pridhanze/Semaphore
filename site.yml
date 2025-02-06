@@ -1,6 +1,11 @@
----
-- hosts: pm3
-- hosts: my_servers
-  become: true
+- name: Ping een host
+  hosts: all
+  gather_facts: no
   tasks:
-    - name: Print OS info
+    - name: Voer een ping uit naar de host
+      ansible.builtin.ping:
+      register: ping_result
+
+    - name: Toon het resultaat van de ping
+      debug:
+        var: ping_result
